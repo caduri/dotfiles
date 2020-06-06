@@ -10,15 +10,15 @@ fi
 
 # Install Homebrew
 if      type brew >/dev/null 2>&1
-then    printf '%s\n' "Installing homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-else    printf '%s\n' "Homebrew is installed, updating..."
+then    printf '%s\n' "Homebrew is installed, updating..."
         brew update
+else    printf '%s\n' "Installing homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 # Install Python3
 if      type python3 >/dev/null 2>&1
-then    printf '%s\n' "Installing python..."
+then    printf '%s\n' "Python is installed"
+else    printf '%s\n' "Installing python..."
         brew install python
-else    printf '%s\n' "Python is installed"
 fi

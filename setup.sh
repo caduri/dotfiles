@@ -16,9 +16,27 @@ else    printf '%s\n' "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-# Install Python3
-if      type python3 >/dev/null 2>&1
-then    printf '%s\n' "Python is installed"
-else    printf '%s\n' "Installing python..."
-        brew install python
+# install Git
+if        type git >/dev/null 2>&1 
+then      printf '%s\n' "Git is installed, updating..."
+          brew upgrade git
+else      printf '%s\n' "Installing git..."
+          brew install git
 fi
+
+# Install Pyenv
+if        type pyenv >/dev/null 2>&1 
+then      printf '%s\n' "Python is installed, updating..."
+          brew upgrade pyenv
+else      printf '%s\n' "Installing python..."
+          brew install pyenv
+          export PATH="$PATH;$(pyenv root)/shims"
+          echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+          exec "$SHELL"
+          git clone https://github.com/momo-lab/xxenv-latest.git "$(pyenv root)"/plugins/xxenv-latest
+fi
+
+# Install Python 2 & 3 latest version
+pyenv latest install
+pyenv latest install 2.7
+pyenv latest global

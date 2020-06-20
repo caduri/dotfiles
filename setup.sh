@@ -15,12 +15,19 @@ then    printf '%s\n' "Homebrew is installed, updating..."
         brew upgrade git
 else    printf '%s\n' "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        printf '%s\n' "Installing git..."
+fi
+
+# Install git
+if      brew ls --versions git > /dev/null 2>&1
+then    printf '%s\n' "git is installed, updating..."
+        brew update
+        brew upgrade git
+else    printf '%s\n' "Installing git..."
         brew install git
 fi
 
 # Install Pyenv
-if        type pyenv >/dev/null 2>&1 
+if        brew ls --versions pyenv > /dev/null 2>&1
 then      printf '%s\n' "Pyenv is installed, updating..."
           brew upgrade pyenv
 else      printf '%s\n' "Installing pyenv..."

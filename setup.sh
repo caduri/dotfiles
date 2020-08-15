@@ -34,7 +34,7 @@ else      printf '%s\n' "Installing pyenv..."
           brew install pyenv
           export PATH="$PATH;$(pyenv root)/shims"
           echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
-          exec "$SHELL"
+          . ~/.bash_profile
           git clone https://github.com/momo-lab/xxenv-latest.git "$(pyenv root)"/plugins/xxenv-latest
 fi
 

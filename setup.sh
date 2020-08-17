@@ -44,12 +44,24 @@ else      printf '%s\n' "Installing pyenv..."
 fi
 
 # Install Python 2 & 3 latest version
-printf '%s\n' "Installing Python 3..."
+printf '%s\n' "Installing latest Python 3..."
 pyenv latest install
-printf '%s\n' "Installing Python 2.7..."
+printf '%s\n' "Installing latest Python 2.7..."
 pyenv latest install 2.7
 pyenv latest global
 
+# Generate SSH token and register to github
+# todo caduri - passwords ???
+if      [[ -d ~/.ssh && -f "~/.ssh/id_rsa" ]]; 
+then    printf '%s\n' "SSH token exists, skipping registration to github"
+else    printf '%s\n' "Generating SSH token"
+        ssh-keygen -q -t rsa -N '' <<< ""$'\n'"y" 2>&1 >/dev/null
+        eval "$(ssh-agent -s)"
+        ssh-add -K ~/.ssh/id_rsa
+        TOKEN="542703f728bfa966c120860ddbdc8ecd037c51d4"
+        SSH_RSA="$(cat ~/.ssh/id_rsa)"
+        curl -u "username:<TOKEN>" --data '{"title":"DevMachine","key":"$SSH_RSA"}' https://api.github.com/user/keys
+fi
 
 # Clone repo & Install ansible modules
 if      [ -d "~/.dotfiles" ] 
@@ -62,3 +74,5 @@ fi
 cd ~/.dotfiles/local-ansible && pipenv install
 cd ~/.dotfiles/local-ansible && pipenv run ansible-galaxy install -r requirements.yml --force
 cd ~/.dotfiles/local-ansible && pipenv run ansible-playbook playbook.yml
+
+# Create config file under ~/.ssh

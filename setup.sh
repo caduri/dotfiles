@@ -79,7 +79,7 @@ else    printf '%s\n' "Generating SSH token"
 fi
 
 # Clone repo & Install ansible modules
-if      [[ -d "~/.dotfiles" ]];
+if      [[ -d ~/.dotfiles ]];
 then    printf '%s\n' "Updating repo"
         cd ~/.dotfiles && git pull origin master
 else    printf '%s\n' "Clone repo"

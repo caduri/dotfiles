@@ -21,10 +21,17 @@ fi
 # Install git
 if      brew ls --versions git > /dev/null 2>&1
 then    printf '%s\n' "git is installed, updating..."
-        brew update
         brew upgrade git
 else    printf '%s\n' "Installing git..."
         brew install git
+fi
+
+# Install lastpass-cli
+if      brew ls --versions lastpass-cli > /dev/null 2>&1
+then    printf '%s\n' "lastpass-cli is installed, updating..."
+        brew upgrade lastpass-cli
+else    printf '%s\n' "Installing lastpass-cli..."
+        brew install lastpass-cli
 fi
 
 # Install Pyenv
@@ -50,29 +57,38 @@ printf '%s\n' "Installing latest Python 2.7..."
 pyenv latest install 2.7
 pyenv latest global
 
+# TODO caduri - move to function 
+printf '%s: ' "Please provide lastpass username"
+read LASTPASS_USER
+printf '%s\n' "Logging in to lastpass"
+lpass login $LASTPASS_USER
+printf '%s\n' "Fetching github username from lastpass"
+GITHUB_USER="$(lpass show -u Github)"
+printf '%s\n' "Fetching github token from lastpass"
+GITHUB_TOKEN="$(lpass show Github --field=Token)"
+
 # Generate SSH token and register to github
-# todo caduri - passwords ???
-if      [[ -d ~/.ssh && -f "~/.ssh/id_rsa" ]]; 
+if      [[ -d ~/.ssh && -f ~/.ssh/id_rsa ]]; 
 then    printf '%s\n' "SSH token exists, skipping registration to github"
 else    printf '%s\n' "Generating SSH token"
         ssh-keygen -q -t rsa -N '' <<< ""$'\n'"y" 2>&1 >/dev/null
         eval "$(ssh-agent -s)"
         ssh-add -K ~/.ssh/id_rsa
-        TOKEN="542703f728bfa966c120860ddbdc8ecd037c51d4"
-        SSH_RSA="$(cat ~/.ssh/id_rsa)"
-        curl -u "username:<TOKEN>" --data '{"title":"DevMachine","key":"$SSH_RSA"}' https://api.github.com/user/keys
+        SSH_RSA="$(cat ~/.ssh/id_rsa.pub)"
+        curl -u "$GITHUB_USER:$GITHUB_TOKEN" --data '{"title":"DevMachine","key":"'"$SSH_RSA"'"}' https://api.github.com/user/keys
 fi
 
 # Clone repo & Install ansible modules
-if      [ -d "~/.dotfiles" ] 
+if      [[ -d "~/.dotfiles" ]];
 then    printf '%s\n' "Updating repo"
         cd ~/.dotfiles && git pull origin master
 else    printf '%s\n' "Clone repo"
         git clone git@github.com:caduri/dotfiles.git ~/.dotfiles
 fi
 
+printf '%s\n' "Preparing to run ansible playbook, installing requirements..."
 cd ~/.dotfiles/local-ansible && pipenv install
+printf '%s\n' "Preparing to run ansible playbook, installing anisble galaxy requirements..."
 cd ~/.dotfiles/local-ansible && pipenv run ansible-galaxy install -r requirements.yml --force
+printf '%s\n' "Running playbook"
 cd ~/.dotfiles/local-ansible && pipenv run ansible-playbook playbook.yml
-
-# Create config file under ~/.ssh

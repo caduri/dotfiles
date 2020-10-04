@@ -92,4 +92,4 @@ cd ~/.dotfiles/local-ansible && pipenv install
 printf '%s\n' "Preparing to run ansible playbook, installing anisble galaxy requirements..."
 cd ~/.dotfiles/local-ansible && pipenv run ansible-galaxy install -r requirements.yml --force
 printf '%s\n' "Running playbook"
-cd ~/.dotfiles/local-ansible && pipenv run ansible-playbook playbook.yml
+cd ~/.dotfiles/local-ansible && pipenv run ansible-playbook main.yml

@@ -57,16 +57,6 @@ printf '%s\n' "Installing latest Python 2.7..."
 pyenv latest install 2.7
 pyenv latest global
 
-# TODO caduri - move to function 
-printf '%s: ' "Please provide lastpass username"
-read LASTPASS_USER
-printf '%s\n' "Logging in to lastpass"
-lpass login $LASTPASS_USER
-printf '%s\n' "Fetching github username from lastpass"
-GITHUB_USER="$(lpass show -u Github)"
-printf '%s\n' "Fetching github token from lastpass"
-GITHUB_TOKEN="$(lpass show Github --field=Token)"
-
 # Generate SSH token and register to github
 if      [[ -d ~/.ssh && -f ~/.ssh/id_rsa ]]; 
 then    printf '%s\n' "SSH token exists, skipping registration to github"
@@ -75,6 +65,17 @@ else    printf '%s\n' "Generating SSH token"
         eval "$(ssh-agent -s)"
         ssh-add -K ~/.ssh/id_rsa
         SSH_RSA="$(cat ~/.ssh/id_rsa.pub)"
+        
+        # TODO caduri - move to function 
+        printf '%s: ' "Please provide lastpass username"
+        read LASTPASS_USER
+        printf '%s\n' "Logging in to lastpass"
+        lpass login $LASTPASS_USER
+        printf '%s\n' "Fetching github username from lastpass"
+        GITHUB_USER="$(lpass show -u Github)"
+        printf '%s\n' "Fetching github token from lastpass"
+        GITHUB_TOKEN="$(lpass show Github --field=Token)"
+
         curl -u "$GITHUB_USER:$GITHUB_TOKEN" --data '{"title":"DevMachine","key":"'"$SSH_RSA"'"}' https://api.github.com/user/keys
 fi
 

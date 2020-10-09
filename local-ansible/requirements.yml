@@ -1,5 +1,6 @@
-- src: drew-kun.nerdfonts 
-- src: drew-kun.terminus_powerline
-- src: drew-kun.homebrew
-- src: drew-kun.macos_terminal
-- src: drew-kun.ohmyzsh
+- name: drew-kun.nerdfonts 
+- name: drew-kun.terminus_powerline
+- name: geerlingguy.homebrew
+- name: drew-kun.macos_terminal
+- name: drew-kun.ohmyzsh
+- name: geerlingguy.mas

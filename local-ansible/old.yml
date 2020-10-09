@@ -1,0 +1,35 @@
+#my dev setup
+---
+- hosts: localhost
+  connection: local
+  gather_facts: yes
+
+  roles:
+    - drew-kun.terminal
+
+  tasks:
+    - import_role:
+        name: geerlingguy.homebrew
+      vars:
+        homebrew_installed_packages:
+          - awscli
+          - fzf
+          - httpie
+          - gh
+          - jq
+          - the_silver_searcher
+          - tmux
+          - wget
+          - zsh-autosuggestions
+          - zsh-syntax-highlighting
+
+    - import_role:
+        name: drew-kun.ohmyzsh
+      vars:
+        ohmyzsh_default_plugins:
+          - git
+          - docker
+          - autojump
+          - aws
+          - mvn
+          - ssh-agent

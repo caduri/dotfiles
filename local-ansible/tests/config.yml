@@ -1,0 +1,16 @@
+homebrew_installed_packages:
+  - awscli
+  - fzf
+  - httpie
+  - gh
+  - jq
+  - the_silver_searcher
+  - tmux
+  - wget
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+
+homebrew_cask_apps:
+  - postman
+  - zoomus
+  - spotify

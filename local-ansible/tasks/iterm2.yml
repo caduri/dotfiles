@@ -11,7 +11,6 @@
     shell: pgrep iTerm2 && killall iTerm2 && sleep 10 || echo 'iTerm2_NOT_STARTED'
     register: macos_terminal_pkill
     changed_when: "'iTerm2_NOT_STARTED' not in macos_terminal_pkill.stdout"
-    when: macos_terminal_iterm2
     tags: iterm2
 
   - name: '[iterm2] Copy iTerm2 preferences'
@@ -21,10 +20,8 @@
       owner: "{{ ansible_user_id }}"
       group: staff
       mode: 0600
-    when: macos_terminal_iterm2
     tags: macos_terminal
 
   - name: '[iterm2] Reload iterm2 config'
     shell: killall cfprefsd
-    when: macos_terminal_iterm2
     tags: iterm2

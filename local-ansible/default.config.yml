@@ -38,12 +38,9 @@ homebrew_taps:
   - homebrew/core
   - homebrew/cask
   - phinze/homebrew-cask
+  - homebrew/cask-fonts
 
 homebrew_cask_appdir: /Applications
-
-homebrew_taps:
-  - homebrew/core
-  - homebrew/cask-fonts
 
 homebrew_cask_apps:
   - postman

@@ -1,0 +1,18 @@
+---
+  - name: '[powerlevel10k] Add powerlevel10k to the list of Oh My Zsh themes.'
+    command: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+    register: pwerlevel10k_result
+    until: pwerlevel10k_result is succeeded
+    tags: ohmyzsh
+  
+  - name: '[powerlevel10k] Update ZSH theme to powerlevel10k'
+    command: sed -i.bak 's/powerlevel9k/powerlevel10k/g' ~/.zshrc
+    register: pwerlevel10k_result
+    until: pwerlevel10k_result is succeeded
+    tags: pwerlevel10k
+
+  - name: '[powerlevel10k] Update ZSH theme to powerlevel10k'
+    command: p10k configure
+    register: pwerlevel10k_result
+    until: pwerlevel10k_result is succeeded
+    tags: pwerlevel10k

@@ -29,6 +29,8 @@ homebrew_installed_packages:
   - pyenv
   - pyenv-virtualenv
   - pipenv
+  - autojump
+  - ansible
 
 homebrew_uninstalled_packages: []
 
@@ -44,6 +46,7 @@ homebrew_cask_apps:
   - firefox
   - google-chrome
   - licecap
+  - font-hack-nerd-font
   
 homebrew_cask_uninstalled_apps: []
 

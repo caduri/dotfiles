@@ -1,0 +1,30 @@
+---
+  - name: '[iterm2] Ensure iTerm2 is installed using Homebrew Cask'
+    homebrew_cask:
+      name: iterm2
+      state: present
+    register: macos_terminal_iterm2_result
+    until: macos_terminal_iterm2_result is succeeded
+    tags: iterm2
+
+  - name: '[iterm2] Make sure iTerm2 is not running'
+    shell: pgrep iTerm2 && killall iTerm2 && sleep 10 || echo 'iTerm2_NOT_STARTED'
+    register: macos_terminal_pkill
+    changed_when: "'iTerm2_NOT_STARTED' not in macos_terminal_pkill.stdout"
+    when: macos_terminal_iterm2
+    tags: iterm2
+
+  - name: '[iterm2] Copy iTerm2 preferences'
+    copy:
+      src: iterm2/com.googlecode.iterm2.plist
+      dest: ~/Documents
+      owner: "{{ ansible_user_id }}"
+      group: staff
+      mode: 0600
+    when: macos_terminal_iterm2
+    tags: macos_terminal
+
+  - name: '[iterm2] Reload iterm2 config'
+    shell: killall cfprefsd
+    when: macos_terminal_iterm2
+    tags: iterm2

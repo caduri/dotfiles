@@ -17,12 +17,14 @@
       - role: geerlingguy.mas
         when: mas_installed_apps
         tags: ['mas']
-      - role: drew-kun.macos_terminal
-        tags: ['macos_terminal']
-      - role: caduri.ohmyzsh
-        tags: ['ohmyzsh']
+      # - role: drew-kun.macos_terminal
+      #   tags: ['macos_terminal']
+      # - role: caduri.ohmyzsh
+      #   tags: ['ohmyzsh']
   
     tasks:
+      - include_tasks: tasks/iterm2.yml
+        tags: ['iterm2']
       # - include_tasks: tasks/osx.yml
       #   when: configure_osx
       #   tags: ['osx']

@@ -52,9 +52,9 @@ fi
 
 # Install Python 2 & 3 latest version
 printf '%s\n' "Installing latest Python 3..."
-pyenv latest install
+pyenv latest install --skip-existing
 printf '%s\n' "Installing latest Python 2.7..."
-pyenv latest install 2.7
+pyenv latest install 2.7 --skip-existing
 pyenv latest global
 
 # Generate SSH token and register to github

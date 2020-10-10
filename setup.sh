@@ -20,21 +20,21 @@ fi
 
 # Install git
 if      brew ls --versions git > /dev/null 2>&1
-then    printf '%s\n' "git is installed, updating..."
-        brew upgrade git
+then    printf '%s\n' "git is already installed"
 else    printf '%s\n' "Installing git..."
+        brew install git
 fi
 
 # Install lastpass-cli
 if      brew ls --versions lastpass-cli > /dev/null 2>&1
-then    printf '%s\n' "lastpass-cli is installed, updating..."
-        brew upgrade lastpass-cli
+then    printf '%s\n' "lastpass-cli is already installed"
 else    printf '%s\n' "Installing lastpass-cli..."
+        brew install lastpass-cli
 fi
 
 # Install Pyenv
 if        brew ls --versions pyenv > /dev/null 2>&1
-then      printf '%s\n' "Pyenv is installed, updating..."
+then      printf '%s\n' "Pyenv is already installed"
 else      printf '%s\n' "Installing pyenv..."
           brew install pyenv
           export PATH="$PATH;$(pyenv root)/shims"

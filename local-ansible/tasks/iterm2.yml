@@ -16,7 +16,7 @@
   - name: '[iterm2] Copy iTerm2 preferences'
     copy:
       src: iterm2/com.googlecode.iterm2.plist
-      dest: ~/Documents
+      dest: ~/Library/Preferences/
       owner: "{{ ansible_user_id }}"
       group: staff
       mode: 0600

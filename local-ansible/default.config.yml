@@ -37,6 +37,7 @@ homebrew_uninstalled_packages: []
 homebrew_taps:
   - homebrew/core
   - homebrew/cask
+  - phinze/homebrew-cask
 
 homebrew_cask_appdir: /Applications
 

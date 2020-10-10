@@ -27,7 +27,7 @@
         tags: ['iterm2']
 
       - include_role:
-          name: myrole
+          name: caduri.ohmyzsh
         tags: ['ohmyzsh']
       # - include_tasks: tasks/osx.yml
       #   when: configure_osx

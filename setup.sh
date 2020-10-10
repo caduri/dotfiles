@@ -14,7 +14,7 @@ then    printf '%s\n' "Homebrew is installed, updating..."
         brew update
 else    printf '%s\n' "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        brew tap phinze/homebrew-cask
+        brew tap homebrew/cask
         brew install brew-cask
 fi
 

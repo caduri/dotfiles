@@ -31,7 +31,7 @@
         tags: ['ohmyzsh']
 
       - include_tasks: tasks/powerlevel10k.yml
-      tags: ['ohmyzsh']
+        tags: ['ohmyzsh']
       # - include_tasks: tasks/osx.yml
       #   when: configure_osx
       #   tags: ['osx']

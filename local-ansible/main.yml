@@ -19,7 +19,7 @@
         tags: ['mas']
       - role: drew-kun.macos_terminal
         tags: ['macos_terminal']
-      - role: drew-kun.ohmyzsh
+      - role: caduri.ohmyzsh
         tags: ['ohmyzsh']
   
     tasks:

@@ -109,3 +109,5 @@ ohmyzsh_default_plugins:
   - pip
   - osx
   - brew
+
+macos_terminal_colorscheme: "Solarized Dark (patched)"

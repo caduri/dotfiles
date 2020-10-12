@@ -5,5 +5,5 @@ roles:
   - name: caduri.ohmyzsh
   - name: geerlingguy.mas
 
-collections:
-  - name: community.general
+# collections:
+#   - name: community.general

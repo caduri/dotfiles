@@ -1,5 +1,9 @@
-- name: drew-kun.nerdfonts 
-- name: drew-kun.terminus_powerline
-- name: geerlingguy.homebrew
-- name: caduri.ohmyzsh
-- name: geerlingguy.mas
+roles:
+  - name: drew-kun.nerdfonts 
+  - name: drew-kun.terminus_powerline
+  - name: geerlingguy.homebrew
+  - name: caduri.ohmyzsh
+  - name: geerlingguy.mas
+
+collections:
+  - name: community.general

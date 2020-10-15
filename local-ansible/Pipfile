@@ -1,2 +1,2 @@
 [packages]
-ansible = "*"
+ansible = "2.10.1"

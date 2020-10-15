@@ -58,7 +58,6 @@ mas_email: "{{ lookup('lastpass', 'Apple Id', field='login') }}"
 mas_password: "{{ lookup('lastpass', 'Apple Id') }}"
 mas_upgrade_all_apps: true
 mas_installed_apps:
-  - { id: 425264550, name: "Blackmagic Disk Speed Test (3.0)" }
   - { id: 946399090, name: "org.telegram.desktop (2.4.2)" }
   - { id: 497799835, name: "com.apple.dt.Xcode (11.1)" }
   - { id: 425424353, name: "cx.c3.theunarchiver (4.2.2)" }

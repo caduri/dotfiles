@@ -46,9 +46,9 @@ homebrew_cask_apps:
   - zoomus
   - spotify
   - firefox
-  - google-chrome
+  # - google-chrome
   - licecap
-  - font-hack-nerd-font
+  # - font-hack-nerd-font
   - spotify
   
 homebrew_cask_uninstalled_apps: []

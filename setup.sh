@@ -94,10 +94,10 @@ cd ~/.dotfiles/local-ansible && pipenv run ansible-galaxy install -r requirement
 
 # Create config yml
 printf '%s\n' "Fetching github username from lastpass"
-MAS_USER="$(lpass show -u \"Apple Id\")"
+MAS_USER='$(lpass show -u "Apple Id")'
 printf '%s\n' "Fetching github token from lastpass"
-MAS_PASSWORD="$(lpass show -p \"Apple Id\")"
-echo '---\nmas_email: "%s"\nmas_password: "%s"' "$MAS_USER" "$MAS_PASSWORD" > ~/.dotfiles/local-ansible/config.yml
+MAS_PASSWORD='$(lpass show -p "Apple Id")'
+echo "---\nmas_email: \"${MAS_USER}\"\nmas_password: \"${MAS_PASSWORD}\"" > ~/.dotfiles/local-ansible/config.yml
 
 printf '%s\n' "Running playbook"
 cd ~/.dotfiles/local-ansible && pipenv run ansible-playbook main.yml -i inventory --ask-become-pass

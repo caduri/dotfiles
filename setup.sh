@@ -87,6 +87,28 @@ else    printf '%s\n' "Clone repo"
         git clone git@github.com:caduri/dotfiles.git ~/.dotfiles
 fi
 
+# Install sdkman
+if      [[ -f ~/.install_sdkman.sh ]];
+then    printf '%s\n' "Sdkman exists, skipping installation"
+else    printf '%s\n' "Installing Sdkman"
+        curl -s "https://get.sdkman.io" --output ~/install_sdkman.sh
+        chmod +x ~/install_sdkman.sh
+        ./install_sdkman.sh
+        . "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
+# Install nvm
+if      [[ -f ~/.install_nvm.sh ]];
+then    printf '%s\n' "nvm exists, skipping installation" #todo update ??
+else    printf '%s\n' "Installing nvm"
+        curl -s "https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh" --output ~/install_nvm.sh
+        chmod +x ~/install_nvm.sh
+        ./install_nvm.sh
+        . ~/.nvm/nvm.sh
+        nvm install v12.19.0
+fi
+
+# Running ansible playbook
 printf '%s\n' "Preparing to run ansible playbook, installing requirements..."
 cd ~/.dotfiles/local-ansible && pipenv install
 printf '%s\n' "Preparing to run ansible playbook, installing anisble galaxy requirements..."

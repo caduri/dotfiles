@@ -1,0 +1,53 @@
+---
+  - name: Configure SDKMAN
+    template:
+      src: templates/sdkman_config.j2
+      dest: '{{ sdkman_dir }}/etc/config'
+      owner: '{{ ansible_user_id }}'
+      group: '{{ ansible_user_gid }}'
+  
+  - name: Update SDKMAN
+    shell: . {{ sdkman_dir }}/bin/sdkman-init.sh && sdk selfupdate
+    args:
+      executable: /bin/bash
+    register: sdk_selfupdate
+    changed_when: sdk_selfupdate.stdout != 'No update available at this time.'
+    when: sdkman_update | bool
+  
+  - name: Install SDK candidates/versions
+    shell: >-
+      . {{ sdkman_dir }}/bin/sdkman-init.sh &&
+      sdk install {{ item.candidate }} {{ item.version }}
+    args:
+      executable: /bin/bash
+    loop: '{{ sdkman_install_packages }}'
+    register: sdk_install
+    changed_when: >-
+      not item.candidate + ' ' + item.version + ' is already installed.'
+      in sdk_install.stdout
+    failed_when: >-
+      sdk_install.rc != 0 and
+      not item.candidate + ' ' + item.version + ' is already installed.'
+      in sdk_install.stdout
+  
+  - name: Get SDK defaults
+    shell: . {{ sdkman_dir }}/bin/sdkman-init.sh && sdk current {{ item }}
+    args:
+      executable: /bin/bash
+    register: get_sdk_defaults
+    changed_when: false
+    loop: >-
+      {{ sdkman_install_packages | map(attribute="candidate") | unique | list }}
+  
+  - name: Set SDK defaults
+    shell: >-
+      . {{ sdkman_dir }}/bin/sdkman-init.sh &&
+      sdk default {{ item.key }} {{ item.value }}
+    args:
+      executable: /bin/bash
+    loop: '{{ sdkman_defaults | dict2items }}'
+    changed_when: >-
+      not item.value in
+      (get_sdk_defaults.results |
+       selectattr('item', 'equalto', item.key) |
+       first).stdout

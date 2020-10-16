@@ -134,14 +134,14 @@ macos_terminal_colorscheme: "Solarized Dark (patched)"
 sdkman_dir: "~/.sdkman"
 sdkman_update: true
 sdkman_install_packages:
-  - { candidate: java, version: '8.0.265.hs' }
+  - { candidate: java, version: '8.0.265.hs-adpt' }
   - { candidate: gradle, version: '6.7' }
   - { candidate: gradle, version: '4.10.3' }
   - { candidate: maven, version: '3.6.3' }
 sdkman_defaults:
   gradle: '4.10.3'
   maven: '3.6.3'
-  java: '8.0.265.hs'
+  java: '8.0.265.hs-adpt'
 
 # Configuration file options
 # Reference: http://sdkman.io/usage (Configuration section)

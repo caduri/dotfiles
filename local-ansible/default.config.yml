@@ -20,8 +20,6 @@ homebrew_installed_packages:
   - gpg
   - iperf
   - nmap
-  - node
-  - nvm
   - wrk
   - cowsay
   - git

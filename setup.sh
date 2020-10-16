@@ -93,10 +93,10 @@ printf '%s\n' "Preparing to run ansible playbook, installing anisble galaxy requ
 cd ~/.dotfiles/local-ansible && pipenv run ansible-galaxy install -r requirements.yml --force
 
 # Create config yml
-printf '%s\n' "Fetching github username from lastpass"
-MAS_USER='$(lpass show -u "Apple Id")'
-printf '%s\n' "Fetching github token from lastpass"
-MAS_PASSWORD='$(lpass show -p "Apple Id")'
+printf '%s\n' "Fetching apple id username from lastpass"
+MAS_USER="$(lpass show -u AppleId)"
+printf '%s\n' "Fetching apple id password from lastpass"
+MAS_PASSWORD="$(lpass show -p AppleId)"
 echo "---\nmas_email: \"${MAS_USER}\"\nmas_password: \"${MAS_PASSWORD}\"" > ~/.dotfiles/local-ansible/config.yml
 
 printf '%s\n' "Running playbook"

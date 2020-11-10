@@ -134,7 +134,7 @@ sdkman_install_packages:
 sdkman_defaults:
   gradle: '4.10.3'
   maven: '3.6.3'
-  java: '8.0.265.hs-adpt'
+  java: '8.0.272.hs-adpt'
 
 # Configuration file options
 # Reference: http://sdkman.io/usage (Configuration section)

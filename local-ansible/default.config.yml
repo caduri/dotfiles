@@ -29,6 +29,7 @@ homebrew_installed_packages:
   - pipenv
   - autojump
   - ansible
+  - percona-toolkit
 
 homebrew_uninstalled_packages: []
 
@@ -41,7 +42,6 @@ homebrew_cask_appdir: /Applications
 
 homebrew_cask_apps:
   - postman
-  - zoomus
   - spotify
   - firefox
   - google-chrome
@@ -55,7 +55,8 @@ homebrew_cask_apps:
   - querious
   - webstorm
   
-homebrew_cask_uninstalled_apps: []
+homebrew_cask_uninstalled_apps: 
+  - zoomus
 
 # See `geerlingguy.mas` role documentation for usage instructions.
 mas_upgrade_all_apps: true

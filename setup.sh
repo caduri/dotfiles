@@ -58,6 +58,18 @@ printf '%s\n' "Installing latest Python 2.7..."
 pyenv latest install 2.7 --skip-existing
 pyenv latest global
 
+# Install rbenv
+if      brew ls --versions rbenv > /dev/null 2>&1
+then    printf '%s\n' "rbenv is already installed"
+else    printf '%s\n' "Installing git..."
+        brew install rbenv
+        rbenv init
+        . ~/.bash_profile
+        curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+        rbenv install 2.7.2
+        rbenv global 2.7.2
+fi
+
 # login into lastpass
 printf '%s: ' "Please provide lastpass username"
 read LASTPASS_USER

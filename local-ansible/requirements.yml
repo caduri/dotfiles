@@ -5,5 +5,6 @@ roles:
   - name: caduri.ohmyzsh
   - name: geerlingguy.mas
 
-# collections:
-#   - name: community.general
+collections:
+  - name: git@github.com:ansible-collections/community.general.git
+    type: git
